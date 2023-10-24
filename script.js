@@ -25,7 +25,18 @@ const runTimer = () => {
         }
         else {
             clearInterval(timerInterval)
-            document.querySelector("#p-btm").innerHTML = `<h1>Game Over</h1>`
+            document.querySelector("#p-btm").innerHTML = `<div id="scoreModal" class="shadow-lg">
+            <div id="top">Game Over</div>
+            <div id="btm">
+                <div id="scoreTable">
+                    <h2>Score: <span id="scoreVal">${score}</span></h2>
+                </div>
+                <div id="gameBtn">
+                    <button onclick="newGame()" id="btn">New Game</button>
+                </div>
+            </div>
+        </div>`
+            // document.getElementById("scoreModal").style.display = "block"
         }
     }, 1000)
 }
@@ -33,6 +44,13 @@ const runTimer = () => {
 const getNewHit = () => {
     hitrn = Math.floor(Math.random() * 10)
     document.querySelector("#hitVal").textContent = hitrn
+}
+
+const newGame = () => {
+    document.getElementById("scoreModal").style.display = "none"
+    timer = 60
+    runTimer()
+    makeBubble()
 }
 
 document.querySelector("#p-btm").addEventListener("click", function (e) {
@@ -44,6 +62,9 @@ document.querySelector("#p-btm").addEventListener("click", function (e) {
     }
 })
 
-runTimer()
-makeBubble();
-getNewHit();
+const startGame = () => {
+    runTimer()
+    makeBubble();
+    getNewHit();
+}
+
